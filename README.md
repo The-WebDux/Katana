@@ -1,6 +1,8 @@
-# Katana v1.0
+# Katana -)====>
 
 - პროგრამას შეუძლია გატეხოს, დააგენერიროს ან ამოიცნოს ჰეშები
+
+- გატეხვის მეთოდები: ონლაინ ბაზები, ბრუტფორსი
 
 - ხელმისაწვდომი ჰეშის ტიპები: md5, sha1, sha224, sha256, sha384, sha512
 
@@ -27,7 +29,6 @@ $ katana.py -t md5 --string 25fcbcf7a396f06d947e11bcbb5217a1 --min 4 --max 6 -l 
 
 
 # სქრინები
-
 ![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-18-11.png)
 ![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-19-09.png)
 ![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-19-20.png)
