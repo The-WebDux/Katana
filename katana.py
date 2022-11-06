@@ -7,14 +7,16 @@ from printy import printy
 import hashlib, os, time, sys, itertools
 import requests
 import re
+from colorama import Fore, Back, Style, init
+init()
 
-red = '\033[31m'
-green = '\033[32m'
-blue = '\033[34m'
-purple = '\033[35m'
-lightgrey = '\033[37m'
-lightgreen = '\033[92m'
-yellow = '\033[93m'
+red = Fore.RED
+green = Fore.GREEN
+blue = Fore.BLUE
+purple = Fore.MAGENTA
+white = Fore.WHITE
+yellow = Fore.YELLOW
+backred = Back.RED
 
 list1 = ' abcdefghijklmnopqrstuvwxyx'
 list2 = ' abcdefghijklmnopqrstuvwxyx0123456789'
@@ -28,10 +30,10 @@ list8 = ' აბგდევზთიკლმნოპჟრსტუფქღ�
 
 def dictionary(location, hashMethod, string):
 	try:
-		with open(location, 'r') as wordlist:
+		with open(location, 'r', encoding='utf-8') as wordlist:
 			wordlist.close()
 	except:
-		print(f"\n{red} [!] ვორდლისტის ლოკაცია არასწორად არის მითითებული ან კითხვის უფლება არ მაქვს")
+		print(f"\n {backred}{white}[!]{Style.RESET_ALL}{red} ვორდლისტის {yellow}ლოკაცია {red}არასწორად არის მითითებული ან კითხვის {yellow}უფლება {red}არ მაქვს")
 		sys.exit()
 
 	count = 0
@@ -64,32 +66,33 @@ def dictionary(location, hashMethod, string):
 
 			count += 1
 			usingWord = word.join("")
-			sys.stdout.write(f"\r{yellow} [*]  ვამოწმებ ლაინს | {red}{count}\r")
+			sys.stdout.write(f"\r{yellow} [+] შემოწმებული ლაინი | {red}{count}\r")
 			sys.stdout.flush()
 			result_MD5 = hashlib.md5(word.strip().encode())
 			if string in shifri:
 				endTime = time.time()
 				timeNOW = endTime - startTime
-				print(f"\r\n{yellow} [+] 		 დრო | {purple}{timeNOW} წამი")
-				print(f"{yellow} [+] მოწოდებული ჰეში | {green}{shifri}")
-				print(f"{yellow} [+] 	      ტექსტი | {lightgreen}{word}\r")
+				print(f"\r\n{yellow} [+] 	 	   დრო | {purple}{timeNOW} წამი")
+				print(f"{yellow} [+]   მოწოდებული ჰეში | {blue}{shifri}")
+				print(f"{green} [+]   	        ტექსტი {yellow}| {green}{word}\r")
 				success = True
 				sys.exit()
 		if not success:
-			print(f"\n{red} [!] ჰეში ამ ვორდლისტიდან ვერ გაიშიფრა, სცადე სხვა მეთოდი")
+			print(f"\n {backred}{white}[!]{Style.RESET_ALL}{red} ჰეში ამ ვორდლისტიდან ვერ გაიშიფრა, სცადე სხვა მეთოდი")
 
 def onlineDatabase(hash):
-	print(f"\n{green} [INFO] ვამოწმებ ონლაინ ბაზებში")
+	print(f"\n{green}{Back.BLACK} [INFO] ვამოწმებ ონლაინ ბაზებში{Style.RESET_ALL}")
 	s = requests.Session()
 	data_payload = {'87':'', 'decrypt':'Decrypt', 'hash':hash}
 	response = s.post('https://md5decrypt.net/en/', data=data_payload, allow_redirects=True, timeout=30)
 	op = re.compile(r'</script></span></span><br>'+hash+' : <b>(.*?)</b><br><br>Found').findall(response.text)
 	if response.status_code != 200:
-		print(f"{red} [!] ვერ დავუკავშირდი სერვერს", response.status_code)		
+		print(f" {backred}{white}[!]{Style.RESET_ALL}{red}ვერ დავუკავშირდი სერვერს", response.status_code)		
 	elif "Found" not in response.text or op==[]:
 		s.cookies.clear()
 	else:
-		print(f"{green} [+] ჰეში ნაპოვნია: {op[0]}")
+		print(f"\n{yellow} [+] ჰეში ნაპოვნია: {green}{op[0]}")
+		sys.exit()
 		s.cookies.clear()
 		sys.exit()
 	
@@ -100,13 +103,13 @@ def onlineDatabase(hash):
 	try:
 		op = re.compile(r'>(.*?)<').findall(op1[0])
 	except:
-		print(f"{red} [-] ჰეში ონლაინ ბაზებში ვერ ვიპოვე")
+		print(f"\n{yellow} [+] ჰეში ნაპოვნია: {green}{op[0]}")
 	if response.status_code!=200:
 		print(f"{red} ვერ დავუკავშირდი სერვერს",response.status_code)
 	elif "No hashes found" in response.text or op==[]:
 		s.cookies.clear()
 	else:
-		print(f"{green} [+] ჰეში ნაპოვნია: {op[0]}")
+		print(f"\n{yellow} [+] ჰეში ნაპოვნია: {green}{op[0]}")
 		s.cookies.clear()
 		sys.exit()
 	s.cookies.clear()
@@ -116,11 +119,11 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 		try:
 			onlineDatabase(string)
 		except requests.exceptions.ConnectionError:
-			print(f"{red} [!] ონლაინ ბაზებში შესამოწმებლად საჭიროა ინტერნეტი")
+			print(f" {backred}{white}[!]{Style.RESET_ALL}{red} ონლაინ ბაზებში შესამოწმებლად საჭიროა ინტერნეტი")
 		except KeyboardInterrupt:
-			print(f"{red} [!] ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
+			print(f" {backred}{white}[!]{Style.RESET_ALL}{red} ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
 			sys.exit()
-	print(f"\n{green} [INFO] ვიწყებ ბრუტფორსს")
+	print(f"\n{green}{Back.BLACK} [INFO] ვიწყებ ბრუტფორსს{Style.RESET_ALL}")
 	success = False
 	datvla = 0
 	maxLenght = maxLenght + 1
@@ -145,7 +148,7 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 	startTime = time.time()
 	sys.stdout.write(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}\n")
 	sys.stdout.flush()
-	print(colored(f" {yellow}[+] დაშიფრული ტექსტი: |{blue} {string} {yellow}|","yellow"))
+	print(f" {yellow}[+] დაშიფრული ტექსტი: |{blue} {string} {yellow}|")
 	startTime = time.time()
 	for n in range(minLenght, maxLenght):
 		for xs in itertools.product(usingList, repeat=n):
@@ -183,12 +186,12 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 			if string == shifri:
 				sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {blue}{shifri}{yellow} \n")
 				print(f" [+]           შედეგი: | ცდა: {purple}{datvla}{yellow} - წამი: {purple}{timeNOW}")
-				print(f" {green}[+]           ტექსტი: {yellow}| {lightgreen}{Generated} ")
+				print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
 				success = True
 				break
 	if not success:
 		sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
-		print(f"\n {red}[!]           ტექსტი: {yellow}|{lightgrey} \033[41mვერ გაიშიფრა\033[0;30m")
+		print(f"\n {backred}{white}[!]{Style.RESET_ALL}{red}           ტექსტი: {yellow}| {backred}{white}ვერ გაიშიფრა{white}")
 
 
 def menu():
@@ -212,15 +215,15 @@ def menu():
 			try:
 				onlineDatabase(string)
 			except requests.exceptions.ConnectionError:
-				print(f"{red} [!] ონლაინ ბაზებში შესამოწმებლად საჭიროა ინტერნეტი")
+				print(f"{backred}{white}[!]{Style.RESET_ALL}{red} ონლაინ ბაზებში შესამოწმებლად საჭიროა ინტერნეტი")
 				sys.exit()
 			except KeyboardInterrupt:
-				print(f"{red} [!] ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
+				print(f" {backred}{white}[!]{Style.RESET_ALL}{red} ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
 				sys.exit()
 		minLenght = int(input(colored(" [?] ტექსტის მინიმალური სიგრძე: ", "yellow")))
 		maxLenght = int(input(colored(" [?] ტექსტის მაქსიმალური სიგრძე: ", "yellow")))
 		print(colored(f"\n{red}-[ სიმბოლოების ნაკრები ]-\n{blue}1: {list1}\n2: {list2}\n3: {list3}\n4: {list4}\n5: {list5}\n6: {list6}\n7: {list7}\n8: {list8}\n"))
-		selectedList = int(input(colored("[!]: აირჩიე სიმბოლოების ნაკრები: ", "yellow")))
+		selectedList = int(input(f"{yellow} [!]: აირჩიე სიმბოლოების ნაკრები: "))
 		
 		match hashMethod:
 			case "md5":
@@ -236,16 +239,16 @@ def menu():
 			case "sha512":
 				decrypt(hashMethod, string, minLenght, maxLenght, selectedList, online=False)
 			case _:
-				print("[!] მიუთითე ჩამოთვლილიდან რომელიმე")
+				print(f"{backred}[!]{Style.RESET_ALL}{red} მიუთითე ჩამოთვლილიდან რომელიმე")
 	elif choice == "3":
-		string = input(colored("[!] შეიყვანე დაშიფრული ტექსტი: ", "green"))
+		string = input(f"{backred}[!]{Style.RESET_ALL}{green} შეიყვანე დაშიფრული ტექსტი: ")
 		os.system("hashid " + string)
 
 
 def crypt(string, hashMethod):
 	hashMethods = ["md5", "sha1", "sha224", "sha256", "sha384", "sha512"]
 	if hashMethod not in hashMethods:
-		print(f"{red} [!] ჰეშირების ტიპი/მეთოდი არასწორად გაქვს მითითებული")
+		print(f" {backred}{white}[!]{Style.RESET_ALL}{red} ჰეშირების {yellow}ტიპი{red}/{yellow}მეთოდი{red} არასწორად გაქვს მითითებული")
 		sys.exit()
 	match hashMethod:
 		case "md5":
@@ -290,7 +293,7 @@ if __name__ == "__main__":
 
 	if args.min and args.max:
 		if args.min > args.max:
-			print(f"\n{red} [!] სავარაუდო ტექსტის {yellow}მინიმალური სიგრძე {red}ვერ იქნება {yellow}მაქსიმალურ სიგრძეზე {red}დიდი")
+			print(f"\n {backred}{white}[!]{Style.RESET_ALL}{red} სავარაუდო ტექსტის {yellow}მინიმალური სიგრძე {red}ვერ იქნება {yellow}მაქსიმალურ სიგრძეზე {red}დიდი")
 			sys.exit()
 
 
@@ -308,15 +311,18 @@ if __name__ == "__main__":
 				decrypt(args.type, args.string, args.min, args.max, args.list )
 				sys.exit()
 		except KeyboardInterrupt:
-			print(f'\n\n{red} [!] დეკრიპტაცია ძალით შეჩერდა')
+			print(f'\n\n {backred}{white}[!]{Style.RESET_ALL}{red} დეკრიპტაცია ძალით შეჩერდა')
 			sys.exit()
 
 	if args.type and args.string and args.online:
 		try:
 			onlineDatabase(args.string)
 			sys.exit()
+		except KeyboardInterrupt:
+			print(f" {backred}{white}[!]{Style.RESET_ALL}{red} ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
+			sys.exit()
 		except:
-			print(f"{red} [!] ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
+			print(f" {backred}{white}[!]{Style.RESET_ALL}{red} რაღაც პარამეტრი არასწორად გაქვს მითითებული")
 			sys.exit()
 
 	if not args.list:
