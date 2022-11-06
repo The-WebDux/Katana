@@ -17,7 +17,7 @@ white = Fore.WHITE
 yellow = Fore.YELLOW
 backred = Back.RED
 
-list1 = ' abcdefghijklmnopqrstuvwxyx'
+list1 = ' abcdefghijklmnopqrstuvwxyxz'
 list2 = ' abcdefghijklmnopqrstuvwxyx0123456789'
 list3 = ' abcdefghijklmnopqrstuvwxyx[]{}"!@#$%^&*().,/;'
 list4 = ' abcdefghijklmnopqrstuvwxyx0123456789[]{}"!@#$%^&*().,/;'
