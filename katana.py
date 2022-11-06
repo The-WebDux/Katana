@@ -281,6 +281,13 @@ if __name__ == "__main__":
 	parser.add_argument('-w','--wordlist', metavar='wordlist.txt', help='ლექსიკონი')
 	args = parser.parse_args()
 
+	if args.menu:
+		try:
+			menu()
+			sys.exit()
+		except KeyboardInterrupt:
+			pass
+
 
 	if args.min and args.max:
 		if args.min > args.max:
@@ -316,13 +323,6 @@ if __name__ == "__main__":
 	if not args.list:
 		crypt(args.string, args.type)
 		sys.exit()
-
-	if args.menu:
-		try:
-			menu()
-			sys.exit()
-		except KeyboardInterrupt:
-			pass
 
 	if len(sys.argv) < 2:
 		parser.print_usage()
