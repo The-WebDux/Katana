@@ -7,3 +7,4 @@ itertools
 argparse
 requests
 hashid
+colorama
