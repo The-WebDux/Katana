@@ -2,7 +2,6 @@
 # Coded by - WebDux -
 
 import argparse
-from termcolor import colored
 from printy import printy
 import hashlib, os, time, sys, itertools
 import requests
@@ -196,21 +195,21 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 
 def menu():
 	printy("\n --- Welcome to Katana --- ", "rBU")
-	print(colored("\n [1] დაშიფვრა",'yellow'))
-	print(colored(" [2] გაშიფვრა",'yellow'))
-	print(colored(" [3] ანალიზი",'yellow'))
-	choice = input(colored("\n[?]- ", "blue"))
+	print(f"{yellow}\n [1] დაშიფვრა")
+	print(f"{yellow} [2] გაშიფვრა")
+	print(f"{yellow} [3] ანალიზი")
+	choice = input(f"{yellow}\n[?]- ")
 
 	if choice == "1":
-		print(colored("- მეთოდები -\nmd5, sha1, sha224, sha256, sha384, sha512", "red"))
-		hashMethod = input(colored("[?] ჰეშირების მეთოდი: ", "yellow"))
-		string = input(colored("[?] ტექსტი: ", "yellow"))
+		print(f"{red}- მეთოდები -\nmd5, sha1, sha224, sha256, sha384, sha512")
+		hashMethod = input(f"{yellow}[?] ჰეშირების მეთოდი: {white}")
+		string = input(f"{yellow}[?] ტექსტი: {white}")
 		crypt(string, hashMethod)
 	elif choice == "2":
 
-		print(colored("- მეთოდები -\nmd5, sha1, sha224, sha256, sha384, sha512", "red"))
-		hashMethod = input(colored(" [?] ჰეშირების მეთოდი: ", "yellow"))
-		string = input(colored(" [?] დაშიფრული ტექსტი: ", "yellow"))
+		print(f"{red}- მეთოდები -\nmd5, sha1, sha224, sha256, sha384, sha512")
+		hashMethod = input(f"{yellow} [?] ჰეშირების მეთოდი: ")
+		string = input(f"{yellow} [?] დაშიფრული ტექსტი: ")
 		if hashMethod == "md5":
 			try:
 				onlineDatabase(string)
@@ -220,9 +219,9 @@ def menu():
 			except KeyboardInterrupt:
 				print(f" {backred}{white}[!]{Style.RESET_ALL}{red} ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
 				sys.exit()
-		minLenght = int(input(colored(" [?] ტექსტის მინიმალური სიგრძე: ", "yellow")))
-		maxLenght = int(input(colored(" [?] ტექსტის მაქსიმალური სიგრძე: ", "yellow")))
-		print(colored(f"\n{red}-[ სიმბოლოების ნაკრები ]-\n{blue}1: {list1}\n2: {list2}\n3: {list3}\n4: {list4}\n5: {list5}\n6: {list6}\n7: {list7}\n8: {list8}\n"))
+		minLenght = int(input(f"{yellow} [?] ტექსტის მინიმალური სიგრძე: "))
+		maxLenght = int(input(f"{yellow} [?] ტექსტის მაქსიმალური სიგრძე: "))
+		print(f"\n{red}-[ სიმბოლოების ნაკრები ]-\n{blue}1: {list1}\n2: {list2}\n3: {list3}\n4: {list4}\n5: {list5}\n6: {list6}\n7: {list7}\n8: {list8}\n")
 		selectedList = int(input(f"{yellow} [!]: აირჩიე სიმბოლოების ნაკრები: "))
 		
 		match hashMethod:
@@ -253,22 +252,22 @@ def crypt(string, hashMethod):
 	match hashMethod:
 		case "md5":
 			result_MD5 = hashlib.md5(string.encode())
-			print("\nMD5: ", colored(result_MD5.hexdigest(),'blue'))
+			print(purple,"\nMD5: ", blue, result_MD5.hexdigest())
 		case "sha1":
 			result_SHA1 = hashlib.sha1(string.encode())
-			print("\nsha1: ", colored(result_SHA1.hexdigest(),'blue'))
+			print(purple,"\nsha1: ", blue, result_SHA1.hexdigest())
 		case "sha224":
 			result_SHA224 = hashlib.sha224(string.encode())
-			print("\nsha224: ", colored(result_SHA224.hexdigest(),'blue'))
+			print(purple,"\nsha224: ", blue, result_SHA224.hexdigest())
 		case "sha256":
 			result_SHA256 = hashlib.sha256(string.encode())
-			print("\nsha256: ", colored(result_SHA256.hexdigest(),'blue'))
+			print(purple,"\nsha256: ", blue, result_SHA256.hexdigest())
 		case "sha384":
 			result_SHA384 = hashlib.sha384(string.encode())
-			print("\nsha384: ", colored(result_SHA384.hexdigest(),'blue'))
+			print(purple,"\nsha384: ", blue, result_SHA384.hexdigest())
 		case "sha512":
 			result_SHA512 = hashlib.sha512(string.encode())
-			print("\nsha512: ", colored(result_SHA512.hexdigest(),'blue'))
+			print(purple,"\nsha512: ", blue, result_SHA512.hexdigest())
 	
 
 if __name__ == "__main__":
