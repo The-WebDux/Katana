@@ -240,7 +240,7 @@ def menu():
 			case _:
 				print(f"{backred}[!]{Style.RESET_ALL}{red} მიუთითე ჩამოთვლილიდან რომელიმე")
 	elif choice == "3":
-		string = input(f"{backred}[!]{Style.RESET_ALL}{green} შეიყვანე დაშიფრული ტექსტი: ")
+		string = input(f" {yellow}[+]{Style.RESET_ALL}{green} შეიყვანე დაშიფრული ტექსტი: ")
 		os.system("hashid " + string)
 
 
