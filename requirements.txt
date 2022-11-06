@@ -1,4 +1,3 @@
-termcolor
 printy
 hashlib
 os
