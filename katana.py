@@ -117,7 +117,6 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 			onlineDatabase(string)
 		except requests.exceptions.ConnectionError:
 			print(f"{red} [!] ონლაინ ბაზებში შესამოწმებლად საჭიროა ინტერნეტი")
-			sys.exit()
 		except KeyboardInterrupt:
 			print(f"{red} [!] ონლაინ ბაზებში შემოწმება ძალით შეჩერდა")
 			sys.exit()
