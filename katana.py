@@ -17,10 +17,10 @@ white = Fore.WHITE
 yellow = Fore.YELLOW
 backred = Back.RED
 
-list1 = ' abcdefghijklmnopqrstuvwxyxz'
-list2 = ' abcdefghijklmnopqrstuvwxyx0123456789'
-list3 = ' abcdefghijklmnopqrstuvwxyx[]{}"!@#$%^&*().,/;'
-list4 = ' abcdefghijklmnopqrstuvwxyx0123456789[]{}"!@#$%^&*().,/;'
+list1 = ' abcdefghijklmnopqrstuvwxyz'
+list2 = ' abcdefghijklmnopqrstuvwxyz0123456789'
+list3 = ' abcdefghijklmnopqrstuvwxyz[]{}"!@#$%^&*().,/;'
+list4 = ' abcdefghijklmnopqrstuvwxyz0123456789[]{}"!@#$%^&*().,/;'
 list5 = ' აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ'
 list6 = ' აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ0123456789'
 list7 = ' აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ[]{}"!@#$%^&*().,/;'
