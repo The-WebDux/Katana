@@ -24,7 +24,7 @@ $ katana --help
 $ katana -m
 
 # გატეხოს md5 ტიპის ჰეში, ჯერ შეამოწმებს ონლაინ ბაზებში შემდეგ დაიწყებს Bruteforce-ს
-$ katana.py -t md5 --string 25fcbcf7a396f06d947e11bcbb5217a1 --min 4 --max 6 -l 1 --online
+$ katana -t md5 --string 25fcbcf7a396f06d947e11bcbb5217a1 --min 4 --max 6 -l 1 --online
 
 # გატეხოს md5 ტიპის ჰეში ვორდლისტით
 $ katana --type md5 --string 34819d7beeabb9260a5c854bc85b3e44 --wordlist /usr/share/wordlists/rockyou.txt
