@@ -2,7 +2,7 @@
 
 - პროგრამას შეუძლია გატეხოს, დააგენერიროს ან ამოიცნოს ჰეშები
 
-- გატეხვის მეთოდები: ონლაინ ბაზები, ბრუტფორსი, ვორდლისტი
+- გატეხვის მეთოდები: ონლაინ ბაზები, ბრუტფორსი, ვორდლისტი, Keyword's.
 
 - ხელმისაწვდომი ჰეშის ტიპები: md5, sha1, sha224, sha256, sha384, sha512
 
@@ -23,11 +23,17 @@ $ katana --help
 # მენიუს გახსნა (ინტერაქტიული გარემო)
 $ katana -m
 
-# გატეხოს md5 ტიპის ჰეში, ჯერ შეამოწმებს ონლაინ ბაზებში შემდეგ დაიწყებს Bruteforce-ს
-$ katana -t md5 --string 25fcbcf7a396f06d947e11bcbb5217a1 --min 4 --max 6 -l 1 --online
+# გატეხავს md5 ტიპის ჰეშს, ჯერ შეამოწმებს ონლაინ ბაზებში შემდეგ დაიწყებს Bruteforce-ს
+$ katana --type md5 --string 25fcbcf7a396f06d947e11bcbb5217a1 --min 4 --max 6 --list 1 --online
 
-# გატეხოს md5 ტიპის ჰეში ვორდლისტით
+# გატეხავს md5 ტიპის ჰეშს ვორდლისტით
 $ katana --type md5 --string 34819d7beeabb9260a5c854bc85b3e44 --wordlist /usr/share/wordlists/rockyou.txt
+
+# გატეხავს md5 ტიპის ჰეშს ონლაინ მონაცემთა ბაზების გამოყენებით
+$ katana --type md5 --string d78b6f30225cdc811adfe8d4e7c9fd34 --online 
+
+# გატეხავს md5 ტიპის ჰეშს შენს მიერ მითითებული სიმბოლოებით
+$ katana --type md5 --string d78b6f30225cdc811adfe8d4e7c9fd34 --min 3 --max 4 --keyword achk
 ```
 
 
