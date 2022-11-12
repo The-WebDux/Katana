@@ -32,7 +32,17 @@ customList = []
 
 hashMethods = ["md5", "sha1", "sha224", "sha256", "sha384", "sha512"]
 
+banerParameter = {"Allow" : True}
+quietParameter = {"Allow" : False}
+
+def banner():
+	printy("\n --- Welcome to Katana --- ", "rBU")
+
+
 def dictionary(location, hashMethod, string):
+	if banerParameter["Allow"] == True:
+		banerParameter["Allow"] = False
+		banner()
 	try:
 		with open(location, 'r', encoding='utf-8') as wordlist:
 			wordlist.close()
@@ -85,6 +95,9 @@ def dictionary(location, hashMethod, string):
 			print(f"\n {backRed}{white}[!]{endStyle}{red} ჰეში ამ ვორდლისტიდან ვერ გაიშიფრა, სცადე სხვა მეთოდი")
 
 def onlineDatabase(hash, type):
+	if banerParameter["Allow"] == True:
+		banerParameter["Allow"] = False
+		banner()
 	if type != "md5":
 		print(f"\n {backRed}{white}[!]{endStyle}{red}{backBlack} ონლაინ ბაზებში მოწმდება მხოლოდ {yellow} MD5{endStyle}")
 		sys.exit()
@@ -124,6 +137,9 @@ def onlineDatabase(hash, type):
 		sys.exit()
 
 def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
+	if banerParameter["Allow"] == True:
+		banerParameter["Allow"] = False
+		banner()
 	if online:
 		try:
 			onlineDatabase(string, hashMethod)
@@ -155,57 +171,110 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 	if listChoice == 0: # ai aq
 		usingList = str(customList)
 
-	startTime = time.time()
-	sys.stdout.write(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}\n")
-	sys.stdout.flush()
-	print(f" {yellow}[+] დაშიფრული ტექსტი: |{blue} {string} {yellow}|")
-	startTime = time.time()
-	for n in range(minLenght, maxLenght):
-		for xs in itertools.product(usingList, repeat=n):
-			endTime = time.time()
-			timeNOW = endTime - startTime
-			datvla += 1
-			match hashMethod:
-				case "md5":
-					Generated = ''.join(map(str, xs)) 
-					resultHash = hashlib.md5(Generated.encode())
-					shifri = resultHash.hexdigest()
-				case "sha1":
-					Generated = ''.join(map(str, xs)) 
-					resultHash = hashlib.sha1(Generated.encode())
-					shifri = resultHash.hexdigest()	
-				case "sha224":
-					Generated = ''.join(map(str, xs)) 
-					resultHash = hashlib.sha224(Generated.encode())
-					shifri = resultHash.hexdigest()	
-				case "sha256":
-					Generated = ''.join(map(str, xs)) 
-					resultHash = hashlib.sha256(Generated.encode())
-					shifri = resultHash.hexdigest()		
-				case "sha384":
-					Generated = ''.join(map(str, xs)) 
-					resultHash = hashlib.sha384(Generated.encode())
-					shifri = resultHash.hexdigest()	
-				case "sha512":
-					Generated = ''.join(map(str, xs)) 
-					resultHash = hashlib.sha512(Generated.encode())
-					shifri = resultHash.hexdigest()
-			if not success:	
-				sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |\r")
-				sys.stdout.flush()
-			if string == shifri:
-				sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {blue}{shifri}{yellow} \n")
-				print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - წამი: {purple}{timeNOW}")
-				print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
-				success = True
-				break
-	if not success:
-		sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
-		print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - წამი: {purple}{timeNOW}")
-		print(f" {red}[!]           ტექსტი: {yellow}| {backRed}{white}ვერ გაიშიფრა{white}{endStyle}")
+
+	if quietParameter["Allow"] == False:
+		startTime = time.time()
+		sys.stdout.write(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}\n")
+		sys.stdout.flush()
+		print(f" {yellow}[+] დაშიფრული ტექსტი: |{blue} {string} {yellow}|")
+		startTime = time.time()
+		for n in range(minLenght, maxLenght):
+			for xs in itertools.product(usingList, repeat=n):
+				endTime = time.time()
+				timeNOW = endTime - startTime
+				datvla += 1
+				match hashMethod:
+					case "md5":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.md5(Generated.encode())
+						shifri = resultHash.hexdigest()
+					case "sha1":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha1(Generated.encode())
+						shifri = resultHash.hexdigest()	
+					case "sha224":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha224(Generated.encode())
+						shifri = resultHash.hexdigest()	
+					case "sha256":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha256(Generated.encode())
+						shifri = resultHash.hexdigest()		
+					case "sha384":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha384(Generated.encode())
+						shifri = resultHash.hexdigest()	
+					case "sha512":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha512(Generated.encode())
+						shifri = resultHash.hexdigest()
+				if not success:	
+					sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |\r")
+					sys.stdout.flush()
+				if string == shifri:
+					sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {blue}{shifri}{yellow} \n")
+					print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{timeNOW} წამი")
+					print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
+					success = True
+					break
+		if not success:
+			sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
+			print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{timeNOW} წამი")
+			print(f" {red}[!]           ტექსტი: {yellow}| {backRed}{white}ვერ გაიშიფრა{white}{endStyle}")
+			print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
+
+	else:
+		print(f"\n{backBlack} {white}[{green}INFO{white}] მიმდინარეობს ბრუტფორსი ჩუმ რეჟიმში, დაელოდე დასრულებას{endStyle}")
+		startTime = time.time()
+		for n in range(minLenght, maxLenght):
+			for xs in itertools.product(usingList, repeat=n):
+				endTime = time.time()
+				timeNOW = endTime - startTime
+				datvla += 1
+				match hashMethod:
+					case "md5":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.md5(Generated.encode())
+						shifri = resultHash.hexdigest()
+					case "sha1":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha1(Generated.encode())
+						shifri = resultHash.hexdigest()	
+					case "sha224":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha224(Generated.encode())
+						shifri = resultHash.hexdigest()	
+					case "sha256":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha256(Generated.encode())
+						shifri = resultHash.hexdigest()		
+					case "sha384":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha384(Generated.encode())
+						shifri = resultHash.hexdigest()	
+					case "sha512":
+						Generated = ''.join(map(str, xs)) 
+						resultHash = hashlib.sha512(Generated.encode())
+						shifri = resultHash.hexdigest()
+				if not success:	
+					pass
+				if string == shifri:
+					print(f"\n {backBlack}{green}გაშიფვრა დასრულებულია. {blue}{endStyle}")
+					print(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}")
+					print(f" {yellow}[+]           შედეგი: | მცდელობა: {purple}{datvla}{green} - დრო: {purple}{timeNOW} წამი")
+					print(f" {yellow}[+]   გასაშიფრი ჰეში: | {blue}{shifri}")
+					print(f" {yellow}[+]           ტექსტი: {yellow}| {green}{Generated} ")
+					success = True
+					break
+		if not success:
+			print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
+			print(f"\n {white}[{red}-{white}]{white} მცდელობა: {purple}{datvla}{white} - დრო: {purple}{timeNOW} {white}წამი")
+
 
 def menu():
-	printy("\n --- Welcome to Katana --- ", "rBU")
+	if banerParameter["Allow"] == True:
+		banerParameter["Allow"] = False
+		banner()
 	print(f"{yellow}\n [1] დაშიფვრა")
 	print(f"{yellow} [2] გაშიფვრა")
 	print(f"{yellow} [3] ანალიზი")
@@ -259,6 +328,9 @@ def menu():
 
 
 def crypt(string, hashMethod):
+	if banerParameter["Allow"] == True:
+		banerParameter["Allow"] = False
+		banner()
 	if hashMethod not in hashMethods:
 		print(f"\n {backRed}{white}[!]{endStyle}{red} ჰეშირების {yellow}ტიპი{red}/{yellow}მეთოდი{red} არასწორად გაქვს მითითებული. გამოიყენე {yellow}--help {red}ან {yellow}--menu")
 		sys.exit()
@@ -284,6 +356,9 @@ def crypt(string, hashMethod):
 	
 
 if __name__ == "__main__":
+	if banerParameter["Allow"] == True:
+		banerParameter["Allow"] = False
+		banner()
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-m','--menu', action='store_true', help='ინტერაქტიული მენიუ')
 	parser.add_argument('-o','--online', action='store_true', help='MD5 ონლაინ ბაზებში შემოწმება')
@@ -294,8 +369,12 @@ if __name__ == "__main__":
 	parser.add_argument('-l','--list', metavar='list', type=int, help='ლექსიკონი')
 	parser.add_argument('-w','--wordlist', metavar='wordlist.txt', help='ლექსიკონი')
 	parser.add_argument('-k','--keyword', metavar='abcdefg...' , help='პირადი ლექსიკონი')
+	parser.add_argument('-q','--quiet', action='store_true', help='ჩუმი რეჟიმი (ჩქარი)')
 	args = parser.parse_args()
 	
+	if args.quiet:
+		quietParameter["Allow"] = True
+
 	if args.menu:
 		try:
 			menu()
