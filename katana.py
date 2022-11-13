@@ -43,6 +43,10 @@ def dictionary(location, hashMethod, string):
 	if banerParameter["Allow"] == True:
 		banerParameter["Allow"] = False
 		banner()
+
+	print(f"\n{Back.BLACK} {white}[{green}INFO{white}] ვიწყებ ბრუტფორსს{endStyle}")
+	if quietParameter["Allow"] == True:
+		print(f"\n{backBlack} {white}[{green}INFO{white}] მიმდინარეობს ბრუტფორსი ჩუმ რეჟიმში, დაელოდე დასრულებას{endStyle}")
 	try:
 		with open(location, 'r', encoding='utf-8') as wordlist:
 			wordlist.close()
@@ -80,13 +84,14 @@ def dictionary(location, hashMethod, string):
 
 			count += 1
 			usingWord = word.join("")
-			sys.stdout.write(f"\r{yellow} [+] შემოწმებული ლაინი | {red}{count}\r")
-			sys.stdout.flush()
-			result_MD5 = hashlib.md5(word.strip().encode())
+			if quietParameter["Allow"] == False:
+				sys.stdout.write(f"\r{yellow} [+] შემოწმებული ლაინი | {red}{count}\r")
+				sys.stdout.flush()
+				result_MD5 = hashlib.md5(word.strip().encode())
 			if string in shifri:
 				endTime = time.time()
 				timeNOW = endTime - startTime
-				print(f"\r\n{yellow} [+] 	 	   დრო | {purple}{timeNOW} წამი")
+				print(f"\r\n{yellow} [+] 	 	   დრო | {purple}{timeNOW} {yellow}წამი")
 				print(f"{yellow} [+]   მოწოდებული ჰეში | {blue}{shifri}")
 				print(f"{green} [+]   	        ტექსტი {yellow}| {green}{word}\r")
 				success = True
@@ -396,6 +401,10 @@ if __name__ == "__main__":
 		except UnicodeDecodeError:
 			print(f"\n\n {backRed}{white}[!]{red}{backBlack} ვეღარ ვაგრძელებ {yellow}ვორდლისტის {red}წაკითხვას, ვორდლისტი {yellow}დაზიანებულია{endStyle}")
 			sys.exit()
+		except KeyboardInterrupt:
+			print(f'\n\n {backRed}{white}[!]{endStyle}{red}{backBlack} ბრუტფორსი ძალით შეჩერდა{endStyle}')
+			sys.exit()
+
 
 	if args.type and args.string and args.min and args.max and args.list:
 		try:
