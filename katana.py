@@ -91,7 +91,7 @@ def dictionary(location, hashMethod, string):
 			if string in shifri:
 				endTime = time.time()
 				timeNOW = endTime - startTime
-				print(f"\r\n{yellow} [+] 	 	   დრო | {purple}{timeNOW} {yellow}წამი")
+				print(f"\r\n{yellow} [+] 	 	შედეგი | წაკითხული ლაინი {purple}{count} {yellow}დრო {purple}{timeNOW} {yellow}წამი")
 				print(f"{yellow} [+]   მოწოდებული ჰეში | {blue}{shifri}")
 				print(f"{green} [+]   	        ტექსტი {yellow}| {green}{word}\r")
 				success = True
@@ -374,7 +374,7 @@ if __name__ == "__main__":
 	parser.add_argument('-l','--list', metavar='list', type=int, help='ლექსიკონი')
 	parser.add_argument('-w','--wordlist', metavar='wordlist.txt', help='ლექსიკონი')
 	parser.add_argument('-k','--keyword', metavar='abcdefg...' , help='პირადი ლექსიკონი')
-	parser.add_argument('-q','--quiet', action='store_true', help='ჩუმი რეჟიმი (ჩქარი)')
+	parser.add_argument('-q','--quiet', action='store_true', help='ჩუმი რეჟიმი (3ჯერ ჩქარი)')
 	args = parser.parse_args()
 	
 	if args.quiet:
