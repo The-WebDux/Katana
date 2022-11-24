@@ -2,7 +2,6 @@
 # Coded by - WebDux -
 
 import argparse
-from termcolor import colored
 from printy import printy
 import hashlib, os, time, sys, itertools
 import requests
@@ -91,7 +90,7 @@ def dictionary(location, hashMethod, string):
 			if string in shifri:
 				endTime = time.time()
 				timeNOW = endTime - startTime
-				print(f"\r\n{yellow} [+] 	 	შედეგი | წაკითხული ლაინი {purple}{count} {yellow}დრო {purple}{timeNOW} {yellow}წამი")
+				print(f"\r\n{yellow} [+] 	 	შედეგი | წაკითხული ლაინი {purple}{count} {yellow}დრო {purple}{int(timeNOW)} {yellow}წამი")
 				print(f"{yellow} [+]   მოწოდებული ჰეში | {blue}{shifri}")
 				print(f"{green} [+]   	        ტექსტი {yellow}| {green}{word}\r")
 				success = True
@@ -218,13 +217,14 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 					sys.stdout.flush()
 				if string == shifri:
 					sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {blue}{shifri}{yellow} \n")
-					print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{timeNOW} წამი")
+					print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
 					print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
 					success = True
 					break
+			break
 		if not success:
 			sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
-			print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{timeNOW} წამი")
+			print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
 			print(f" {red}[!]           ტექსტი: {yellow}| {backRed}{white}ვერ გაიშიფრა{white}{endStyle}")
 			print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
 
@@ -266,14 +266,14 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 				if string == shifri:
 					print(f"\n {backBlack}{green}გაშიფვრა დასრულებულია. {blue}{endStyle}")
 					print(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}")
-					print(f" {yellow}[+]           შედეგი: | მცდელობა: {purple}{datvla}{green} - დრო: {purple}{timeNOW} წამი")
+					print(f" {yellow}[+]           შედეგი: | მცდელობა: {purple}{datvla}{green} - დრო: {purple}{int(timeNOW)} წამი")
 					print(f" {yellow}[+]   გასაშიფრი ჰეში: | {blue}{shifri}")
 					print(f" {yellow}[+]           ტექსტი: {yellow}| {green}{Generated} ")
 					success = True
 					break
 		if not success:
 			print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
-			print(f"\n {white}[{red}-{white}]{white} მცდელობა: {purple}{datvla}{white} - დრო: {purple}{timeNOW} {white}წამი")
+			print(f"\n {white}[{red}-{white}]{white} მცდელობა: {purple}{datvla}{white} - დრო: {purple}{int(timeNOW)} {white}წამი")
 
 
 def menu():
