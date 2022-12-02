@@ -9,4 +9,3 @@ argparse
 requests
 hashid
 colorama
-printy
