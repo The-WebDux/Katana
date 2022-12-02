@@ -11,6 +11,7 @@ except ImportError:
 	print("\n    pip install -r requirements.txt")
 init()
 
+
 red = Fore.RED
 green = Fore.GREEN
 blue = Fore.BLUE
@@ -107,6 +108,7 @@ def dictionary(location, hashMethod, string):
 			print(f"\n {backRed}{white}[!]{endStyle}{red} ჰეში ამ ვორდლისტიდან ვერ გაიშიფრა, სცადე სხვა მეთოდი")
 
 def onlineDatabase(hash, type):
+	cont = True
 	if banerParameter["Allow"] == True:
 		banerParameter["Allow"] = False
 		banner()
@@ -134,20 +136,19 @@ def onlineDatabase(hash, type):
 	try:
 		op = re.compile(r'>(.*?)<').findall(op1[0])
 		print(f"\n{yellow} [+] ჰეში ნაპოვნია: {green}{op[0]}")
-		sys.exit()		
+		cont = False
 	except:
 		pass
-
-	if response.status_code!=200:
-		print(f"{red} ვერ დავუკავშირდი სერვერს",response.status_code)
-	elif "No hashes found" in response.text or op==[]:
-		print(f" {backBlack}{white}[{red}-{white}] ვერ ვიპოვე{endStyle}")
-		s.cookies.clear()
-	else:
-		print(f"\n{yellow} [+] ჰეში ნაპოვნია: {green}{op[0]}")
-		s.cookies.clear()
-		sys.exit()
-
+	if cont == True:
+		if response.status_code!=200:
+			print(f"{red} ვერ დავუკავშირდი სერვერს",response.status_code)
+		elif "No hashes found" in response.text or op==[]:
+			print(f" {backBlack}{white}[{red}-{white}] ვერ ვიპოვე{endStyle}")
+			s.cookies.clear()
+		else:
+			print(f"\n{yellow} [+] ჰეში ნაპოვნია: {green}{op[0]}")
+			s.cookies.clear()
+	sys.exit()
 def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 	if banerParameter["Allow"] == True:
 		banerParameter["Allow"] = False
