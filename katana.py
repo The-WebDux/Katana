@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 # Coded by - WebDux -
 
-import argparse
-import hashlib, os, time, sys, itertools
-import requests
-import re
-from colorama import Fore, Back, Style, init
+try:
+	import argparse
+	import hashlib, os, time, sys, itertools
+	import requests
+	import re
+	from colorama import Fore, Back, Style, init
+except ImportError:
+	print("\n    pip install -r requirements.txt")
 init()
 
 red = Fore.RED
