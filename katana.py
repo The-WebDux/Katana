@@ -2,7 +2,6 @@
 # Coded by - WebDux -
 
 import argparse
-from printy import printy
 import hashlib, os, time, sys, itertools
 import requests
 import re
@@ -35,8 +34,14 @@ banerParameter = {"Allow" : True}
 quietParameter = {"Allow" : False}
 
 def banner():
-	printy("\n --- Welcome to Katana --- ", "rBU")
+    print(f"""{red}
+  {blue}Coded - by {red}WebDux {blue}-{red}
 
+         />_________________________________
+[{purple}########{red}[]_________________________________>
+         \>
+           {purple}#https://github.com/The-WebDux/Katana
+    """)
 
 def dictionary(location, hashMethod, string):
 	if banerParameter["Allow"] == True:
@@ -156,124 +161,123 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 	success = False
 	datvla = 0
 	maxLenght = maxLenght + 1
-	if listChoice == 1:
-		usingList = list1
-	if listChoice == 2:
-		usingList = list2
-	if listChoice == 3:
-		usingList = list3
-	if listChoice == 4:
-		usingList = list4
-	if listChoice == 5:
-		usingList = list5
-	if listChoice == 6:
-		usingList = list6
-	if listChoice == 7:
-		usingList = list7
-	if listChoice == 8:
-		usingList = list8
-	if listChoice == 0: # ai aq
-		usingList = str(customList)
+	match listChoice:
+		case 1:
+			usingList = list1
+		case 2:
+			usingList = list2
+		case 3:
+			usingList = list3
+		case 4:
+			usingList = list4
+		case 5:
+			usingList = list5
+		case 6:
+			usingList = list6
+		case 7:
+			usingList = list7
+		case 8:
+			usingList = list8
+		case _:
+			usingList = str(customList)
 
-
-	if quietParameter["Allow"] == False:
-		startTime = time.time()
-		sys.stdout.write(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}\n")
-		sys.stdout.flush()
-		print(f" {yellow}[+] დაშიფრული ტექსტი: |{blue} {string} {yellow}|")
-		startTime = time.time()
-		for n in range(minLenght, maxLenght):
-			for xs in itertools.product(usingList, repeat=n):
-				endTime = time.time()
-				timeNOW = endTime - startTime
-				datvla += 1
-				match hashMethod:
-					case "md5":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.md5(Generated.encode())
-						shifri = resultHash.hexdigest()
-					case "sha1":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha1(Generated.encode())
-						shifri = resultHash.hexdigest()	
-					case "sha224":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha224(Generated.encode())
-						shifri = resultHash.hexdigest()	
-					case "sha256":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha256(Generated.encode())
-						shifri = resultHash.hexdigest()		
-					case "sha384":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha384(Generated.encode())
-						shifri = resultHash.hexdigest()	
-					case "sha512":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha512(Generated.encode())
-						shifri = resultHash.hexdigest()
-				if not success:	
-					sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |\r")
-					sys.stdout.flush()
-				if string == shifri:
-					sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {blue}{shifri}{yellow} \n")
-					print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
-					print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
-					success = True
-					break
-			break
-		if not success:
-			sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
-			print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
-			print(f" {red}[!]           ტექსტი: {yellow}| {backRed}{white}ვერ გაიშიფრა{white}{endStyle}")
-			print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
-
-	else:
-		print(f"\n{backBlack} {white}[{green}INFO{white}] მიმდინარეობს ბრუტფორსი ჩუმ რეჟიმში, დაელოდე დასრულებას{endStyle}")
-		startTime = time.time()
-		for n in range(minLenght, maxLenght):
-			for xs in itertools.product(usingList, repeat=n):
-				endTime = time.time()
-				timeNOW = endTime - startTime
-				datvla += 1
-				match hashMethod:
-					case "md5":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.md5(Generated.encode())
-						shifri = resultHash.hexdigest()
-					case "sha1":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha1(Generated.encode())
-						shifri = resultHash.hexdigest()	
-					case "sha224":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha224(Generated.encode())
-						shifri = resultHash.hexdigest()	
-					case "sha256":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha256(Generated.encode())
-						shifri = resultHash.hexdigest()		
-					case "sha384":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha384(Generated.encode())
-						shifri = resultHash.hexdigest()	
-					case "sha512":
-						Generated = ''.join(map(str, xs)) 
-						resultHash = hashlib.sha512(Generated.encode())
-						shifri = resultHash.hexdigest()
-				if not success:	
-					pass
-				if string == shifri:
-					print(f"\n {backBlack}{green}გაშიფვრა დასრულებულია. {blue}{endStyle}")
-					print(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}")
-					print(f" {yellow}[+]           შედეგი: | მცდელობა: {purple}{datvla}{green} - დრო: {purple}{int(timeNOW)} წამი")
-					print(f" {yellow}[+]   გასაშიფრი ჰეში: | {blue}{shifri}")
-					print(f" {yellow}[+]           ტექსტი: {yellow}| {green}{Generated} ")
-					success = True
-					break
-		if not success:
-			print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
-			print(f"\n {white}[{red}-{white}]{white} მცდელობა: {purple}{datvla}{white} - დრო: {purple}{int(timeNOW)} {white}წამი")
+	match quietParameter["Allow"]:
+		case False:
+			sys.stdout.write(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}\n")
+			sys.stdout.flush()
+			print(f" {yellow}[+] დაშიფრული ტექსტი: |{blue} {string} {yellow}|")
+			startTime = time.time()
+			for n in range(minLenght, maxLenght):
+				for xs in itertools.product(usingList, repeat=n):
+					endTime = time.time()
+					timeNOW = endTime - startTime
+					datvla += 1
+					match hashMethod:
+						case "md5":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.md5(Generated.encode())
+							shifri = resultHash.hexdigest()
+						case "sha1":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha1(Generated.encode())
+							shifri = resultHash.hexdigest()	
+						case "sha224":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha224(Generated.encode())
+							shifri = resultHash.hexdigest()	
+						case "sha256":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha256(Generated.encode())
+							shifri = resultHash.hexdigest()		
+						case "sha384":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha384(Generated.encode())
+							shifri = resultHash.hexdigest()	
+						case "sha512":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha512(Generated.encode())
+							shifri = resultHash.hexdigest()
+					if not success:	
+						sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |\r")
+						sys.stdout.flush()
+					if string == shifri:
+						sys.stdout.write(f"\r {yellow}[+]     ვიყენებ ჰეშს: | {blue}{shifri}{yellow} \n")
+						print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
+						print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
+						success = True
+						break
+			if not success:
+				sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
+				print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
+				print(f" {red}[!]           ტექსტი: {yellow}| {backRed}{white}ვერ გაიშიფრა{white}{endStyle}")
+				print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
+		
+		case True:
+			print(f"\n{backBlack} {white}[{green}INFO{white}] მიმდინარეობს ბრუტფორსი ჩუმ რეჟიმში, დაელოდე დასრულებას{endStyle}")
+			startTime = time.time()
+			for n in range(minLenght, maxLenght):
+				for xs in itertools.product(usingList, repeat=n):
+					endTime = time.time()
+					timeNOW = endTime - startTime
+					datvla += 1
+					match hashMethod:
+						case "md5":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.md5(Generated.encode())
+							shifri = resultHash.hexdigest()
+						case "sha1":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha1(Generated.encode())
+							shifri = resultHash.hexdigest()	
+						case "sha224":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha224(Generated.encode())
+							shifri = resultHash.hexdigest()	
+						case "sha256":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha256(Generated.encode())
+							shifri = resultHash.hexdigest()		
+						case "sha384":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha384(Generated.encode())
+							shifri = resultHash.hexdigest()	
+						case "sha512":
+							Generated = ''.join(map(str, xs)) 
+							resultHash = hashlib.sha512(Generated.encode())
+							shifri = resultHash.hexdigest()
+					if not success:	
+						pass
+					if string == shifri:
+						print(f"\n {backBlack}{green}გაშიფვრა დასრულებულია. {blue}{endStyle}")
+						print(f"\n {yellow}[+]      პარამეტრები: | ტიპი: {purple}{hashMethod}{yellow} ლექსიკონი: {purple}{listChoice}{yellow} სიმბოლო: {purple}{minLenght} - {maxLenght-1}")
+						print(f" {yellow}[+]           შედეგი: | მცდელობა: {purple}{datvla}{green} - დრო: {purple}{int(timeNOW)} წამი")
+						print(f" {yellow}[+]   გასაშიფრი ჰეში: | {blue}{shifri}")
+						print(f" {yellow}[+]           ტექსტი: {yellow}| {green}{Generated} ")
+						success = True
+						break
+			if not success:
+				print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
+				print(f"\n {white}[{red}-{white}]{white} მცდელობა: {purple}{datvla}{white} - დრო: {purple}{int(timeNOW)} {white}წამი")
 
 
 def menu():
