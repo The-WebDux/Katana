@@ -42,7 +42,7 @@ $ katana --type md5 --string 23b4222d2613a2765d4d432d2d65e88e --wordlist /usr/sh
 
 # სქრინები
 
-![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-18-11.png)
-![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-19-09.png)
-![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-19-20.png)
-![](https://github.com/vakh0/Screenshots/blob/main/Katana/Screenshot%20from%202022-10-16%2017-24-26.png)
+![](https://raw.githubusercontent.com/The-WebDux/Katana/main/screens/1.png)
+![](https://raw.githubusercontent.com/The-WebDux/Katana/main/screens/2.png)
+![](https://raw.githubusercontent.com/The-WebDux/Katana/main/screens/3.png)
+![](https://raw.githubusercontent.com/The-WebDux/Katana/main/screens/4.png)
