@@ -8,12 +8,9 @@
 
 # ინსტალაცია
 ```bash
-$ git clone https://github.com/The-WebDux/Katana
-$ cd Katana
-$ pip install -r requirements.txt
-$ sudo chmod +x katana.py
-$ sudo mv katana.py /usr/bin/katana
-$ katana
+git clone https://github.com/The-WebDux/Katana && cd Katana && pip install -r requirements.txt && sudo chmod +x katana.py
+sudo mv katana.py /usr/bin/katana
+katana
 ```
 
 # ინსტრუქცია
