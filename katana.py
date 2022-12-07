@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 # Coded by - WebDux -
 
-try:
-	import argparse
-	import hashlib, os, time, sys, itertools
-	import requests
-	import re
-	from colorama import Fore, Back, Style, init
-except ImportError:
-	print("\n    pip install -r requirements.txt")
+import argparse
+import hashlib
+import os
+import time
+import sys
+import itertools
+import requests
+import re
+from colorama import Fore, Back, Style, init
 init()
 
 
@@ -229,7 +230,7 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 						print(f" [+]           შედეგი: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
 						print(f" {green}[+]           ტექსტი: {yellow}| {green}{Generated} ")
 						success = True
-						break
+						sys.exit()
 			if not success:
 				sys.stdout.write(f"\r {yellow}[-]     ვიყენებ ჰეშს: | {red}{shifri}{yellow} |")
 				print(f"\r {yellow}[-]        რესურსები: | მცდელობა: {purple}{datvla}{yellow} - დრო: {purple}{int(timeNOW)} წამი")
@@ -278,7 +279,7 @@ def decrypt(hashMethod, string, minLenght, maxLenght, listChoice, online=None):
 						print(f" {yellow}[+]   გასაშიფრი ჰეში: | {blue}{shifri}")
 						print(f" {yellow}[+]           ტექსტი: {yellow}| {green}{Generated} ")
 						success = True
-						break
+						sys.exit()
 			if not success:
 				print(f"\n {backRed}{white}[!]{endStyle}{yellow} ჰეში {red}ვერ {yellow}გაიშიფრა, სცადე {red}სხვა პარამეტრები")
 				print(f"\n {white}[{red}-{white}]{white} მცდელობა: {purple}{datvla}{white} - დრო: {purple}{int(timeNOW)} {white}წამი")
